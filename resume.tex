@@ -1,11 +1,13 @@
 \documentclass{resume} % Use the custom resume.cls style
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
 
 \usepackage[left=0.4 in,top=0.4in,right=0.4 in,bottom=0.4in]{geometry} % Document margins
 \newcommand{\tab}[1]{\hspace{.2667\textwidth}\rlap{#1}} 
 \newcommand{\itab}[1]{\hspace{0em}\rlap{#1}}
-\name{Robert Rothschild} % Your name
+\name{Robert Rothschild}
 \address{rarothsc@gmail.com, (720)-785-0488 \\
-2137 Superior St. Bellingham WA, 98229}  % Your phone number and email
+2137 Superior St. Bellingham WA, 98229}
 
 \begin{document}
 
@@ -56,15 +58,31 @@ Responsible for collecting marine data using autonomous boats and processing the
 \begin{tabular}{ @{} >{\bfseries}l @{\hspace{6ex}} l }
 Skills & Quick learner, self starter, people and time management, innovative and creative thinking,\\ & risk management, ambitious, responsible, and well disciplined
 \\
-Programs & Django, Python, HTML, CSS, Google Cloud Platform, MatLab, LaTeX, MS Office, and \\ & Google Drive  \\
 \end{tabular}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{ c c c c c c c c }
+    \centering
+    \setlength\extrarowheight{2.5pt} 
+    Django & Python & HTML & Css & GCP & MatLab & LaTeX & MS Office \\ 
+    \includegraphics[width=0.05\textwidth]{logoDjango} & 
+    \includegraphics[width=0.05\textwidth]{logoPython} & 
+    \includegraphics[width=0.05\textwidth]{logoHtml} & 
+    \includegraphics[width=0.035\textwidth]{logoCss} & 
+    \includegraphics[width=0.05\textwidth]{logoGCP} &
+    \includegraphics[width=0.05\textwidth]{logoMatlab} & 
+    \raisebox{.5\height}{\includegraphics[width=0.05\textwidth]{logoLatex}} & 
+    \includegraphics[width=0.05\textwidth]{logoMsOffice} \\
+    \end{tabular}
+\end{table}\\
+
 
 \end{rSection}
 
 %-------------------------------------------------
 %	KEY ACCOMPLISHMENTS SECTION
 %-------------------------------------------------
-
 
 %-------------------------------------------------
 %	EXTRA-CURRICULAR SECTION
@@ -81,7 +99,6 @@ Date of Birth & 22 November 1994\\
 Marital status & Unmarried.\\
 Languages known & English and Spanish.\\
 Special interests & Music, mountain biking, hiking, \\
-Residential address & Door no.71-31-283, Durganagar,\\ &Malkapuram, Visakhapatnam, 560011\\
 \end{tabular}
 
 \end{rSection}
