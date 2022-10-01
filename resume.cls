@@ -1,131 +1,79 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Medium Length Professional CV - RESUME CLASS FILE
-%
-% This template has been downloaded from:
-% http://www.LaTeXTemplates.com
-%
-% This class file defines the structure and design of the template. 
-%
-% Original header:
-% Copyright (C) 2010 by Trey Hunner
-%
-% Copying and distribution of this file, with or without modification,
-% are permitted in any medium without royalty provided the copyright
-% notice and this notice are preserved. This file is offered as-is,
-% without any warranty.
-%
-% Created by Trey Hunner and modified by www.LaTeXTemplates.com
-%
+% Custom Latex Resume Template
+% Robert Rothschild
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\ProvidesClass{resume}[2010/07/10 v0.9 Resume class]
-
-\LoadClass[11pt,letterpaper]{article} % Font size and paper type
-
-\usepackage[parfill]{parskip} % Remove paragraph indentation
-\usepackage{array} % Required for boldface (\bf and \bfseries) tabular columns
-\usepackage{ifthen} % Required for ifthenelse statements
-
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesClass{resume}[2022/09/30 v1 Resume class]
+\LoadClass[11pt]{article} % Font size and paper type
 \pagestyle{empty} % Suppress page numbers
 
-%----------------------------------------------------------------------------------------
-%	HEADINGS COMMANDS: Commands for printing name and address
-%----------------------------------------------------------------------------------------
+% ============================
+%   Create new commands
+% ============================
+% 
+\newcommand{\namePadding}{\smallskip}
+\newcommand{\infoPadding}{\smallskip}
+\newcommand{\sectionTitlePadding}{\smallskip}
+\newcommand{\sectionEndPadding}{\smallskip}
+\newcommand{\headerLine}{\rule{\textwidth}{1pt}}
+\newcommand{\breakLine}{\rule{\textwidth}{0.5pt}}
+% These commands make a new command take a variable number of inputs
+% https://davidyat.es/2016/07/27/writing-a-latex-macro-that-takes-a-variable-number-of-arguments/
+\newcommand{\checknextarg}{\@ifnextchar\bgroup{\gobblenextarg}}
+\newcommand{\gobblenextarg}[1]{#1\@ifnextchar\bgroup{\gobblenextarg}}
 
-\def \name#1{\def\@name{#1}} % Defines the \name command to set name
-\def \@name {} % Sets \@name to empty by default
-
-\def \addressSep {$\diamond$} % Set default address separator to a diamond
-
-% One, two or three address lines can be specified 
-\let \@addressone \relax
-\let \@addresstwo \relax
-\let \@addressthree \relax
-
-% \address command can be used to set the first, second, and third address (last 2 optional)
-\def \address #1{
-  \@ifundefined{@addresstwo}{
-    \def \@addresstwo {#1}
-  }{
-  \@ifundefined{@addressthree}{
-  \def \@addressthree {#1}
-  }{
-     \def \@addressone {#1}
-  }}
+% ============================
+%   Create the Header
+% ============================
+% Print name
+\newcommand{\printName}[1]{
+    {\Huge{\bf #1}}
+    \namePadding
+}
+% Print personal info
+\newcommand{\printInfo}[3]{
+    { #1 \\ #2 \\ #3}
+}
+% The container in which name and personal info live
+\newcommand{\makeHeader}[4]{
+    \begin{flushleft}
+        \printName{#1} \\
+        \printInfo{#2}{#3}{#4}
+    \end{flushleft}
+    \headerLine
 }
 
-% \printaddress is used to style an address line (given as input)
-\def \printaddress #1{
-  \begingroup
-    \def \\ {\addressSep\ }
-    \centerline{#1}
-  \endgroup
-  \par
-  \addressskip
+% ============================
+%   Standardize sections
+% ============================
+% Print the section title
+\newcommand{\sectionTitle}[1]{
+    {
+        \MakeUppercase \bf #1
+        \sectionTitlePadding
+        \breakLine
+    }
+}
+% The container that the title and content live in
+\newenvironment{newSection}[1]{
+        % Inputs = title, content
+        \begin{flushleft}
+        \sectionTitle{#1}
+    }{  
+        \end{flushleft}
+        \sectionEndPadding
 }
 
-% \printname is used to print the name as a page header
-\def \printname {
-  \begingroup
-    \hfil{\MakeUppercase{\namesize\bf \@name}}\hfil
-    \nameskip\break
-  \endgroup
+% ============================
+%   Custom section formats
+% ============================
+\newcommand{\education}[4]{
+    % Inputs = degree, school name, location, time frame
+    {\bf #1, #2, #3, #4}
 }
-
-%----------------------------------------------------------------------------------------
-%	PRINT THE HEADING LINES
-%----------------------------------------------------------------------------------------
-
-\let\ori@document=\document
-\renewcommand{\document}{
-  \ori@document  % Begin document
-  \printname % Print the name specified with \name
-  \@ifundefined{@addressone}{}{ % Print the first address if specified
-    \printaddress{\@addressone}}
-  \@ifundefined{@addresstwo}{}{ % Print the second address if specified
-    \printaddress{\@addresstwo}}
-     \@ifundefined{@addressthree}{}{ % Print the third address if specified
-    \printaddress{\@addressthree}}
+\newcommand{\experience}[4]{
+    % Inputs = company, position, time frame, description
+    {\bf #1, #2 \hfill #3 \\}
+    {#4 \\}
 }
-
-%----------------------------------------------------------------------------------------
-%	SECTION FORMATTING
-%----------------------------------------------------------------------------------------
-
-% Defines the rSection environment for the large sections within the CV
-\newenvironment{rSection}[1]{ % 1 input argument - section name
-  \sectionskip
-  \MakeUppercase{\bf #1} % Section title
-  \sectionlineskip
-  \hrule % Horizontal line
-  \begin{list}{}{ % List for each individual item in the section
-    \setlength{\leftmargin}{1.5em} % Margin within the section
-  }
-  \item[]
-}{
-  \end{list}
-}
-
-%----------------------------------------------------------------------------------------
-%	WORK EXPERIENCE FORMATTING
-%----------------------------------------------------------------------------------------
-
-\newenvironment{rSubsection}[4]{ % 4 input arguments - company name, year(s) employed, job title and location
- {\bf #1} \hfill {#2} % Bold company name and date on the right
- \ifthenelse{\equal{#3}{}}{}{ % If the third argument is not specified, don't print the job title and location line
-  \\
-  {\em #3} \hfill {\em #4} % Italic job title and location
-  }\smallskip
-  \begin{list}{$\cdot$}{\leftmargin=0em} % \cdot used for bullets, no indentation
-   \itemsep -0.5em \vspace{-0.5em} % Compress items in list together for aesthetics
-  }{
-  \end{list}
-  \vspace{0.5em} % Some space after the list of bullet points
-}
-
-% The below commands define the whitespace after certain things in the document - they can be \smallskip, \medskip or \bigskip
-\def\namesize{\huge} % Size of the name at the top of the document
-\def\addressskip{\smallskip} % The space between the two address (or phone/email) lines
-\def\sectionlineskip{\medskip} % The space above the horizontal line for each section 
-\def\nameskip{\bigskip} % The space after your name at the top
-\def\sectionskip{\medskip} % The space after the heading section
