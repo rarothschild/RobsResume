@@ -1,16 +1,18 @@
 \documentclass{resume} % Use the custom resume.cls style
 \usepackage{graphicx}
-\graphicspath{ {./images/} }
+\usepackage{enumitem,stix}
+\newlist{myList}{itemize}{1}
+\setlist[myList]{label=$\smblksquare$,nosep}
 
 \usepackage[left=0.4 in,top=0.4in,right=0.4 in,bottom=0.4in]{geometry} % Document margins
 \newcommand{\tab}[1]{\hspace{.2667\textwidth}\rlap{#1}} 
 \newcommand{\itab}[1]{\hspace{0em}\rlap{#1}}
 
 \begin{document}
-\makeHeader{Robert Rothschild}{rarothsc@gmail.com}{720-785-0488}{Bellingham WA, 98229}
+\makeHeader{Robert Rothschild}{rarothsc@gmail.com}{rarothschild.github.io/RobSite2/}{720-785-0488}{Bellingham WA, 98229}
 
 \begin{newSection}{OBJECTIVE}
-{To find a job that allows me to exercise my strength and knowledge in software engineering.}
+To find a job that allows me to exercise my strength and knowledge in software engineering.
 \end{newSection}
 
 \begin{newSection}{EDUCATION}
@@ -18,33 +20,28 @@
 \end{newSection}
 
 \begin{newSection}{EXPERIENCE}
-\experience{The Heliospace Corporation}{Engineer}{Jan 2017 - Current}{
-Lead the company's software development effort including the creating of an API for processing Finite Element Analysis data. Maintained databases used for writing out various engineering documents such as bill of materials and material identification and usage list. Wrote and contributed to numerous technical documents given to customers. Has been on multiple hardware integration and test teams for projects such as the James Webb Space Telescope and NASA's Lunar Gateway.
-}
-\experience{Colorado Space Grant Consortium}{Research Assistant}{Jan 2017 - Current}
-{Participated in the robotics challenge to design, fabricate, and program a robot capable of traversing a Mars like environment.}
-\experience{Fort Lewis College}{Research Assistant}{May 2015 - July 2015}
-{Responsible for collecting marine data using autonomous boats and processing the data in MatLab.}
+    \experience{The Heliospace Corporation}{Engineer}{Jan 2017 - Current}
+    \begin{myList}
+        \item Created a Matlab API to handle large sets of FEA data. This includes the file management, post processing, and result presentation.
+        \item Authored and contributed to 
+        \item Lead the company's software development effort including the creating of an API for processing Finite Element Analysis data.  Wrote and contributed to numerous technical documents given to customers. Has been on multiple hardware integration and test teams for projects such as the James Webb Space Telescope and NASA's Lunar Gateway.
+        \item Maintained databases used for writing out various engineering documents such as bill of materials and material identification and usage list.
+    \end{myList}
+    
+    \experience{Colorado Space Grant Consortium}{Research Assistant}{Jan 2017 - Current}
+    \begin{myList}
+        \item Participated in the robotics challenge to design, fabricate, and program a robot capable of traversing a Mars like environment.
+    \end{myList}
+    
+    \experience{Fort Lewis College}{Research Assistant}{May 2015 - July 2015}
+    \begin{myList}
+        \item Responsible for collecting marine data using autonomous boats and processing the data in MatLab.
+    \end{myList}
 \end{newSection} 
 
-\begin{newSection}{PUBLICATION}
-    \begin{table}[h]
-        \centering
-        \begin{tabular}{ c c c c c c c c }
-        \centering
-        Django & Python & HTML & Css & GCP & MatLab & LaTeX & MS Office \\ 
-        \includegraphics[width=0.05\textwidth]{logoDjango} & 
-        \includegraphics[width=0.05\textwidth]{logoPython} & 
-        \includegraphics[width=0.05\textwidth]{logoHtml} & 
-        \includegraphics[width=0.035\textwidth]{logoCss} & 
-        \includegraphics[width=0.05\textwidth]{logoGCP} &
-        \includegraphics[width=0.05\textwidth]{logoMatlab} & 
-        \raisebox{.5\height}{\includegraphics[width=0.05\textwidth]{logoLatex}} & 
-        \includegraphics[width=0.05\textwidth]{logoMsOffice} \\
-        \end{tabular}
-    \end{table}
-    \end{newSection}
-\end{document}
+\begin{newSection}{PUBLICATIONS}
+    S.-H. Yoo, A. Stuntz, Y. Zhang, R. Rothschild, G. A. Hollinger, and R. N. Smith, “Experimental analysis of receding horizon planning for marine monitoring,” in Proceedings of The 10th International Conference on Field and Service Robotics, (Toronto, Canada), June 2015.
+\end{newSection}
 
 \begin{newSection}{SKILLS}
     \begin{table}[h]
@@ -62,5 +59,6 @@ Lead the company's software development effort including the creating of an API 
         \includegraphics[width=0.05\textwidth]{logoMsOffice} \\
         \end{tabular}
     \end{table}
-    \end{newSection}
+\end{newSection}
+
 \end{document}

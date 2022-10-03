@@ -7,41 +7,42 @@
 \ProvidesClass{resume}[2022/09/30 v1 Resume class]
 \LoadClass[11pt]{article} % Font size and paper type
 \pagestyle{empty} % Suppress page numbers
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\graphicspath{ {images/} }
+ \renewcommand{\familydefault}{\sfdefault}
 
 % ============================
 %   Create new commands
 % ============================
-% 
 \newcommand{\namePadding}{\smallskip}
 \newcommand{\infoPadding}{\smallskip}
-\newcommand{\sectionTitlePadding}{\smallskip}
+\newcommand{\sectionTitlePadding}{}
 \newcommand{\sectionEndPadding}{\smallskip}
-\newcommand{\headerLine}{\rule{\textwidth}{1pt}}
+\newcommand{\headerLine}{\rule{\textwidth}{2pt}}
 \newcommand{\breakLine}{\rule{\textwidth}{0.5pt}}
-% These commands make a new command take a variable number of inputs
-% https://davidyat.es/2016/07/27/writing-a-latex-macro-that-takes-a-variable-number-of-arguments/
-\newcommand{\checknextarg}{\@ifnextchar\bgroup{\gobblenextarg}}
-\newcommand{\gobblenextarg}[1]{#1\@ifnextchar\bgroup{\gobblenextarg}}
+% https://tex.stackexchange.com/questions/135617/how-do-i-reduce-space-before-and-after-hrule
+\newcommand{\HRule}[1][\medskipamount]{\par
+    \vspace*{\dimexpr-\parskip-\baselineskip+#1}
+    \noindent\rule{\linewidth}{0.2mm}\par
+    \vspace*{\dimexpr-\parskip-.5\baselineskip+#1}}
 
 % ============================
 %   Create the Header
 % ============================
-% Print name
-\newcommand{\printName}[1]{
-    {\Huge{\bf #1}}
-    \namePadding
-}
-% Print personal info
-\newcommand{\printInfo}[3]{
-    { #1 \\ #2 \\ #3}
-}
 % The container in which name and personal info live
-\newcommand{\makeHeader}[4]{
-    \begin{flushleft}
-        \printName{#1} \\
-        \printInfo{#2}{#3}{#4}
-    \end{flushleft}
-    \headerLine
+\newcommand{\makeHeader}[5]{
+    {\raggedright\Huge\bf #1}
+    \hfill
+    \begin{minipage}[b]{0.4\textwidth}
+        \raggedleft\bf
+        #4\\
+        #2\\
+        #3\\
+    \end{minipage}
+    \hspace{2mm}
+    \includegraphics[width=3cm]{Bike Pic Cropped Again.jpg}
+    \HRule[3mm]
 }
 
 % ============================
@@ -49,20 +50,16 @@
 % ============================
 % Print the section title
 \newcommand{\sectionTitle}[1]{
-    {
-        \MakeUppercase \bf #1
-        \sectionTitlePadding
-        \breakLine
-    }
+        {\MakeUppercase\bf\large #1} \\
+        \HRule
 }
 % The container that the title and content live in
 \newenvironment{newSection}[1]{
         % Inputs = title, content
-        \begin{flushleft}
+        \raggedright
         \sectionTitle{#1}
     }{  
-        \end{flushleft}
-        \sectionEndPadding
+        \vspace{3mm}
 }
 
 % ============================
@@ -70,10 +67,11 @@
 % ============================
 \newcommand{\education}[4]{
     % Inputs = degree, school name, location, time frame
-    {\bf #1, #2, #3, #4}
+    {\bf #1 \hfill #4}\\
+    {#2, #3}
 }
-\newcommand{\experience}[4]{
-    % Inputs = company, position, time frame, description
-    {\bf #1, #2 \hfill #3 \\}
-    {#4 \\}
+
+\newcommand{\experience}[3]{
+    % Inputs = company, position, time frame, description items
+    {\bf #2  -  #1  \hfill #3 \\}
 }
