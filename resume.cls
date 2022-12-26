@@ -9,6 +9,7 @@
 \pagestyle{empty} % Suppress page numbers
 \usepackage{graphicx}
 \usepackage{wrapfig}
+\usepackage{mathptmx}
 \graphicspath{ {images/} }
  \renewcommand{\familydefault}{\sfdefault}
 
@@ -31,18 +32,13 @@
 %   Create the Header
 % ============================
 % The container in which name and personal info live
-\newcommand{\makeHeader}[5]{
-    {\raggedright\Huge\bf #1}
-    \hfill
-    \begin{minipage}[b]{0.4\textwidth}
-        \raggedleft\bf
-        #4\\
-        #2\\
-        #3\\
-    \end{minipage}
-    \hspace{2mm}
-    \includegraphics[width=3cm]{Bike Pic Cropped Again.jpg}
-    \HRule[3mm]
+\newcommand{\makeHeader}[7]{
+        \begin{center}
+            {\fontsize{40}{40}\bf\raggedright #1} \\
+            \vspace{0.1cm}
+            #2   -    #3   -    #4 \\
+            #5   -    #6   -    #7
+        \end{center}
 }
 
 % ============================
@@ -50,7 +46,7 @@
 % ============================
 % Print the section title
 \newcommand{\sectionTitle}[1]{
-        {\MakeUppercase\bf\large #1} \\
+        {\MakeUppercase\large\bf #1} \\
         \HRule
 }
 % The container that the title and content live in
@@ -58,8 +54,9 @@
         % Inputs = title, content
         \raggedright
         \sectionTitle{#1}
+        \vspace{1mm}
     }{  
-        \vspace{3mm}
+        
 }
 
 % ============================
@@ -71,7 +68,7 @@
     {#2, #3}
 }
 
-\newcommand{\experience}[3]{
+\newcommand{\experience}[2]{
     % Inputs = company, position, time frame, description items
-    {\bf #2  -  #1  \hfill #3 \\}
+    {\bf #1  \hfill #2 \\}
 }
